@@ -1,5 +1,6 @@
 package com.almikhaylov.presentablemongorest.config;
 
+import com.almikhaylov.presentablemongorest.config.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +23,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeHttpRequests().requestMatchers("/api/v1/auth/**").permitAll()
+                .authorizeHttpRequests().requestMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

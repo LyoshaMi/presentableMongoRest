@@ -1,1 +1,10 @@
-
+spring:
+  data:
+    mongodb:
+      database: Slides
+      port: 27017
+      host: localhost
+  datasource:
+    url: jdbc:postgresql://${DATASOURCE_HOST:localhost}:5444/presentable
+    username: aleksey
+    password: as180401

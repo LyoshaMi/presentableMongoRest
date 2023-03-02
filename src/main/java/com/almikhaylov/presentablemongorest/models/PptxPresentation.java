@@ -1,35 +1,33 @@
 package com.almikhaylov.presentablemongorest.models;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Data
-@Document(collection = "slides")
+@Document(collection = "presentations")
 @NoArgsConstructor
-@AllArgsConstructor
-public class PptxSlide {
+public class PptxPresentation {
 
     @Id
     private String id;
     @Indexed
     private String username;
-    private int numberOfSlide;
     private String nameOfPresentation;
-    private BasicDBObject jsonObject;
 
-    public PptxSlide(String username, String jsonObject) {
+    private List<PptxSlide> slides;
+
+    public PptxPresentation(String username, String nameOfPresentation, List<PptxSlide> slides) {
         this.username = username;
-        BasicDBObject object = BasicDBObject.parse(jsonObject);
-        this.jsonObject = object;
-    }
-
-    public void setJsonObject(String string) {
-        BasicDBObject object = BasicDBObject.parse(string);
-        this.jsonObject = object;
+        this.nameOfPresentation = nameOfPresentation;
+        this.slides = slides;
     }
 }
