@@ -99,13 +99,12 @@ public class PptxController {
         return dbObjects;
     }
 
-    @GetMapping("/{presentation}/all-slides")
-    public List<DBObject> getAllSlidesOfPresentation(@PathVariable String nameOfPresentation,
-                                                     @AuthenticationPrincipal User user){
-        PptxPresentation presentation = presentationRepo.findPptxPresentationByUsernameAndNameOfPresentation(user.getUsername(), nameOfPresentation);
-        List<String> slides = presentation.getSlides().stream()
+    @GetMapping("/all-slides/{presentation}")
+    public List<DBObject> getAllSlidesOfPresentation(@PathVariable String presentation){
+        PptxPresentation presentationPptx = presentationRepo.findPptxPresentationByUsernameAndNameOfPresentation("nikita",presentation);
+        List<String> slides = presentationPptx.getSlides().stream()
                 .map(el -> el.getJsonObject().toString())
-                .map(el -> new JSONObject(el).getJSONArray("scenes").toString())
+                .map(el -> new JSONObject(el).toString())
                 .collect(Collectors.toList());
         List<DBObject> dbObjects = new ArrayList<>();
         for (String jsonObject:

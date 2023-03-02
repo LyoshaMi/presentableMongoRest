@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface PresentationRepo extends MongoRepository<PptxPresentation, String> {
     List<PptxPresentation> findAllByUsername(String username);
-    PptxPresentation findPptxPresentationByUsernameAndNameOfPresentation(String username, String nameOfPresentation);
+    PptxPresentation findPptxPresentationByUsernameAndNameOfPresentation(String username,String nameOfPresentation);
 
     @Query(value = "{ 'username' : ?0}", fields = "{'nameOfPresentation' : 1}")
     List<String> findAllNamesOfPresentations(String username);
