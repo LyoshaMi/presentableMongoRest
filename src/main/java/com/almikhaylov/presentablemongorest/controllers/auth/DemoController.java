@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/demo-controller")
+@RequestMapping("/demo")
 public class DemoController {
 
     @GetMapping
-    public ResponseEntity<String> sayHello(@AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(user.getUsername());
+    public ResponseEntity<String> sayHello() {
+        return ResponseEntity.ok("health check");
     }
 
 }
