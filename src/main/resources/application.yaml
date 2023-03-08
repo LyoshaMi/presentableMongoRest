@@ -5,6 +5,6 @@ spring:
       port: 27017
       host: localhost
   datasource:
-    url: jdbc:postgresql://${DATASOURCE_HOST:localhost}:${POSTGRES_PORT:5432}/presentable
-    username: ${POSTGRES_USER:aleksey}
-    password: ${POSTGRES_PASSWORD:aleksey}
+    url: jdbc:postgresql://localhost:5432/presentable
+    username: aleksey
+    password: aleksey

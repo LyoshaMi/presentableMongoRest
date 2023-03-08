@@ -1,30 +1,29 @@
-version: '3'
+version: "3.7"
 services:
-  presentable-main-service:
-    image: presentable-main-service
+  api_service:
     build: .
     restart: always
     ports:
       - 8080:8080
-    environment:
-      POSTGRES_HOST: postgres-presentable-db
-      POSTGRES_PASSWORD: aleksey
-      POSTGRES_USER: aleksey
-      POSTGRES_PORT: 5432
+    depends_on:
+      - postgresql_db
     links:
-      - mongo-presentable-db
-  postgres-presentable-db:
-    container_name: postgres-presentable-db
+      - postgresql_db:app_db
+  postgresql_db:
     image: postgres:12
+    restart: always
     ports:
       - 5432:5432
     environment:
-      POSTGRES_DB: presentable
+      POSTGRES_DATABASE: presentable
+      POSTGRES_USER: aleksey
       POSTGRES_PASSWORD: aleksey
-  mongo-presentable-db:
-    container_name: "mongo-presentable-db"
-    image: mongo:latest
-    ports:
-      - 27027:27017
-    environment:
-      MONGO_DB: Slides
+      POSTGRES_ROOT_PASSWORD: aleksey
+      POSTGRES_HOST_AUTH_METHOD: trust
+#  mongo-presentable-db:
+#    container_name: "mongo-presentable-db"
+#    image: mongo:latest
+#    ports:
+#      - 27027:27017
+#    environment:
+#      MONGO_DB: Slides
